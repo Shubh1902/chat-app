@@ -1,26 +1,27 @@
 import Comment from 'src/components/comment';
-import { CommentInterface } from 'src/modules/comments/types';
-export const getComment = (comment: CommentInterface) => {
+import Input from 'src/components/input';
+import { ChildrenInterface, InputInterface } from 'src/modules/comments/types';
+export const getComment = (comment: ChildrenInterface) => {
   return <Comment {...comment} />;
 };
-
-const ComponentGenerator = (props: { data: Array<CommentInterface> }) => {
+export const getReply = (reply: InputInterface) => {
+  return <Input {...reply} placeholder="Reply" reply={true}></Input>;
+};
+const ComponentGenerator = (props: { data: Array<ChildrenInterface> }) => {
   return <>{generateComponent(props.data)}</>;
 };
-const generateComponent = (data: Array<CommentInterface>) => {
+const generateComponent = (data: Array<ChildrenInterface>) => {
   return data.map((comment) => {
     const CommentJSX = getComment(comment);
-    if (comment.replies.length) {
-      const Children = generateComponent(comment.replies);
-      return (
-        <div>
-          {CommentJSX}
-          <div className="child-comment">{Children}</div>
+    return (
+      <div key={comment.id}>
+        {CommentJSX}
+        <div className="child-comment">
+          {comment.reply && getReply(comment.reply)}
+          {comment.children.length > 0 && generateComponent(comment.children)}
         </div>
-      );
-    } else {
-      return <div>{CommentJSX}</div>;
-    }
+      </div>
+    );
   });
 };
 
