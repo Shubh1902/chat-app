@@ -26,10 +26,6 @@ export const SAMPLE_DATA: Array<ChildrenInterface> = [
     time: new Date(),
     likes: 10,
     comment: `Long regarded as a place no`,
-    reply: {
-      id: uuidv4(),
-      imgSrc: 'https://via.placeholder.com/150/92c952',
-    },
     children: [
       {
         id: uuidv4(),
@@ -38,7 +34,6 @@ export const SAMPLE_DATA: Array<ChildrenInterface> = [
         time: new Date(),
         likes: 10,
         comment: `Long regarded as a place no`,
-      
         children: [
           {
             id: uuidv4(),

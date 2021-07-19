@@ -6,6 +6,8 @@ interface Props {
   name: string;
   comment: string;
   likes: number;
+  treeId: string;
+  addReply: any;
 }
 const Comment = (props: Props) => {
   return (
@@ -30,7 +32,13 @@ const Comment = (props: Props) => {
           <div className="arrow-down-div ">
             <i className="arrow down"></i>
           </div>
-          <div>Reply</div>
+          <div
+            onClick={() => {
+              props.addReply(props.treeId);
+            }}
+          >
+            Reply
+          </div>
           <div>Share</div>
         </div>
       </div>
