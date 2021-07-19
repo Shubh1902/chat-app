@@ -1,0 +1,10 @@
+.container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.child-comment {
+    width: 90%;
+    margin: auto;
+}

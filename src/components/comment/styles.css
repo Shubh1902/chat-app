@@ -1,0 +1,59 @@
+.user-name {
+    color: var(--primary-color);
+}
+
+.time {
+    color: var(--secondary-color);
+    font-size: 13px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#comment-actions {
+    margin-top: 5px;
+}
+
+#comment-actions div {
+    color: var(--secondary-color);
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+#comment-actions div:not(:first-child) {
+    margin-left: 10px;
+}
+
+.arrow {
+    border: solid var(--secondary-color);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    margin-top: 2px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.likes {
+    margin-top: 2px;
+}
+
+.arrow-up-div {
+    margin-top: 2px;
+}
+
+.arrow-down-div {
+    margin-top: -2px;
+}
+
+.comment {
+    margin-top: 5px;
+}
