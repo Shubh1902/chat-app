@@ -1,18 +1,15 @@
-import React from 'react';
-import { Comment } from 'src/components/comment';
-import { Input } from 'src/components/input';
-import {
-  SAMPLE_COMMENT_PROP,
-  SAMPLE_DATA,
-} from 'src/modules/comments/constants';
-import { generateComponent } from 'src/modules/comments/helper';
+import React, { Suspense } from 'react';
+import Input from 'src/components/input';
+import { SAMPLE_DATA } from 'src/modules/comments/constants';
 import './styles.css';
+const ComponentGenerator = React.lazy(
+  () => import('src/modules/comments/ComponentGenerator')
+);
 export const Comments = () => {
+  const data = SAMPLE_DATA.concat(SAMPLE_DATA).concat(SAMPLE_DATA);
   return (
     <div className="container">
-      <div>
-        <Input />
-      </div>
+      <Input />
       {/* <div>
         <Comment {...SAMPLE_COMMENT_PROP} />
         <div className="child-comment">
@@ -22,7 +19,9 @@ export const Comments = () => {
       <div>
         <Comment {...SAMPLE_COMMENT_PROP} />
       </div> */}
-      {generateComponent(SAMPLE_DATA)}
+      <Suspense fallback={<div>Loading...</div>}>
+        <ComponentGenerator data={data} />
+      </Suspense>
     </div>
   );
 };

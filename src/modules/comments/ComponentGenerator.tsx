@@ -1,7 +1,13 @@
-import { Comment } from 'src/components/comment';
+import Comment from 'src/components/comment';
 import { CommentInterface } from 'src/modules/comments/types';
+export const getComment = (comment: CommentInterface) => {
+  return <Comment {...comment} />;
+};
 
-export const generateComponent = (data: Array<CommentInterface>) => {
+const ComponentGenerator = (props: { data: Array<CommentInterface> }) => {
+  return <>{generateComponent(props.data)}</>;
+};
+const generateComponent = (data: Array<CommentInterface>) => {
   return data.map((comment) => {
     const CommentJSX = getComment(comment);
     if (comment.replies.length) {
@@ -18,6 +24,4 @@ export const generateComponent = (data: Array<CommentInterface>) => {
   });
 };
 
-export const getComment = (comment: CommentInterface) => {
-  return <Comment {...comment} />;
-};
+export default ComponentGenerator;

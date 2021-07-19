@@ -7,7 +7,7 @@ interface Props {
   comment: string;
   likes: number;
 }
-export const Comment = (props: Props) => {
+const Comment = (props: Props) => {
   return (
     <div className="flex margin-top-20">
       <div>
@@ -37,3 +37,4 @@ export const Comment = (props: Props) => {
     </div>
   );
 };
+export default Comment;

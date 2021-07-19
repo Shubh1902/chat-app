@@ -1,5 +1,5 @@
 import './styles.css'
-export const Input = () => {
+ const Input = () => {
   return (
     <div className="flex">
       <div>
@@ -15,3 +15,4 @@ export const Input = () => {
     </div>
   );
 };
+export default Input
