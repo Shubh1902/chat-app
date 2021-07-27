@@ -1,12 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Comments } from 'src/modules/comments';
+import { Home } from 'src/modules/Home';
 
 function App() {
   return (
     <div className="App">
-      <Comments/>
+      <Home />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import './styles.css';
 interface Props {
@@ -6,32 +7,33 @@ interface Props {
   name: string;
   comment: string;
   likes: number;
+  dislikes: number;
   treeId: string;
   addReply: any;
+  time: Date;
 }
 const Comment = (props: Props) => {
   return (
     <div className="flex margin-top-20">
-      <div>
+      <div id="image-div">
         <img src={props.imgSrc} alt="" className="comment-height" />
       </div>
       <div className="flex-column margin-left-10">
         <div className="flex">
           <div className="user-name">{props.name}</div>
-          <div className="flex-column margin-left-20 time">7 Hours ago</div>
+          <div className="flex-column margin-left-20 time">
+            {moment(props.time).fromNow()}
+          </div>
         </div>
         <div className="flex comment">
           <div className="text-left ">{props.comment}</div>
         </div>
         <div className="flex" id="comment-actions">
-          <div className="likes">{props.likes}</div>
-          <div className="arrow-up-div">
-            <i className="arrow up"></i>
-          </div>
+          {props.likes > 0 && <div>{props.likes}</div>}
+          <div>Like</div>
           <div>|</div>
-          <div className="arrow-down-div ">
-            <i className="arrow down"></i>
-          </div>
+          {props.dislikes > 0 && <div>{props.dislikes}</div>}
+          <div>Dislike</div>
           <div
             onClick={() => {
               props.addReply(props.treeId);
