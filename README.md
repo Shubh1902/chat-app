@@ -20,3 +20,5 @@ Code for editing comments is written which I will complete as a personal project
 I have used localstorage to store the data to facilitate persistance on page reload.
 
 Changing data in localstorage changes data in all tabs. 
+
+Note: I am certainly aware of the user experience points which are missing here that I can implement.
