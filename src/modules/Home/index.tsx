@@ -16,9 +16,14 @@ export const Home = () => {
       setImg(data.data.thumbnailUrl);
     });
   }, []);
-  const { commentTree, addReplyInputField, addComment } = useData(
-    getCachedData()
-  );
+  const {
+    commentTree,
+    addReplyInputField,
+    addComment,
+    saveReply,
+    deleteComment,
+    edit
+  } = useData(getCachedData());
   return (
     <div className="container">
       <CommentInput
@@ -27,7 +32,13 @@ export const Home = () => {
         addCallback={addComment}
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <ComponentGenerator data={commentTree} addReply={addReplyInputField} />
+        <ComponentGenerator
+          data={commentTree}
+          addReply={addReplyInputField}
+          saveReply={saveReply}
+          deleteComment={deleteComment}
+          edit={edit}
+        />
       </Suspense>
     </div>
   );

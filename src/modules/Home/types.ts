@@ -12,5 +12,6 @@ export interface CommentInterface {
 export interface ReplyInputInterface {
   id: string;
   imgSrc: string;
-  saveReply:any
+  saveReply: any;
+  text?: string;
 }

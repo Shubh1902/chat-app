@@ -4,12 +4,13 @@ interface Props {
   id: string;
   imgSrc: string;
   saveReply: any;
+  treeId: string;
 }
 const ReplyInput = (props: Props) => {
   const [reply, setReply] = useState('');
   const onKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      props.saveReply(props.id, reply);
+    if (event.key === 'Enter' && reply) {
+      props.saveReply(props.treeId, reply, props.id);
     }
     event.stopPropagation();
   };

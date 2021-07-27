@@ -16,17 +16,43 @@ export const useData = (data: CommentInterface[]) => {
     localStorage.setItem('commentTree', commentTreeString);
   }, [commentTree]);
 
-  const addReplyInputField = (treeId: string) => {
+  const saveReply = (treeId: string, comment: string, id: string) => {
     let localTree = _.cloneDeep(data);
     const path = treeId.split('/');
     path.splice(0, 1);
+    const node = findNodeByPath(localTree, path);
+    generateRandomImage().then((data) => {
+      const imgUrl = data.data.thumbnailUrl;
+      generateRandomName().then((data) => {
+        const name = data.data.name;
+        node.children.unshift({
+          id: uuidv4(),
+          children: [],
+          comment,
+          imgSrc: imgUrl,
+          likes: 0,
+          dislikes: 0,
+          name,
+          time: new Date(),
+        });
+        // node.replyInput = null;
+        setCommentTree(localTree);
+      });
+    });
+  };
+  const addReplyInputField = (treeId: string) => {
+    let localTree = _.cloneDeep(commentTree);
+    const path = treeId.split('/');
+    path.splice(0, 1);
     let node = findNodeByPath(localTree, path);
-    node.reply = {
-      id: uuidv4(),
-      imgSrc: 'https://via.placeholder.com/150/92c952',
-      saveReply,
-    };
-    setCommentTree(localTree);
+    generateRandomImage().then((data) => {
+      const imgUrl = data.data.thumbnailUrl;
+      node.replyInput = {
+        id: uuidv4(),
+        imgSrc: imgUrl,
+      };
+      setCommentTree(localTree);
+    });
   };
 
   const addComment = (comment: string) => {
@@ -52,23 +78,41 @@ export const useData = (data: CommentInterface[]) => {
     });
   };
 
-  const saveReply = (treeId: string, comment: string) => {
-    let localTree = _.cloneDeep(data);
+  const deleteComment = (treeId: string, id: string) => {
+    let localTree = _.cloneDeep(commentTree);
     const path = treeId.split('/');
     path.splice(0, 1);
-    const node = findNodeByPath(localTree, path);
-
-    node.children.unshift({
-      id: uuidv4(),
-      children: [],
-      comment,
-      imgSrc: 'https://via.placeholder.com/150/92c952',
-      likes: 0,
-      dislikes: 0,
-      name: 'Shubhanshu Bahuguna',
-      time: new Date(),
-    });
+    path.splice(path.length - 1, 1);
+    if (path.length) {
+      let node = findNodeByPath(localTree, path);
+      let index = node.children.findIndex((elem) => elem.id === id);
+      node.children.splice(index, 1);
+    } else {
+      let index = localTree.findIndex((elem) => elem.id === id);
+      localTree.splice(index, 1);
+    }
     setCommentTree(localTree);
   };
-  return { commentTree, addReplyInputField, addComment };
+
+  const edit = (treeId: string, id: string) => {
+    let localTree = _.cloneDeep(commentTree);
+    const path = treeId.split('/');
+    path.splice(0, 1);
+    let node = findNodeByPath(localTree, path);
+    node.replyInput = {
+      id,
+      imgSrc: node.imgSrc,
+      text: node.comment,
+    };
+    deleteComment(treeId, id);
+    setCommentTree(localTree);
+  };
+  return {
+    commentTree,
+    addReplyInputField,
+    addComment,
+    saveReply,
+    deleteComment,
+    edit,
+  };
 };

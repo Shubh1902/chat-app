@@ -11,6 +11,8 @@ interface Props {
   treeId: string;
   addReply: any;
   time: Date;
+  deleteComment: any;
+  edit: any;
 }
 const Comment = (props: Props) => {
   return (
@@ -36,12 +38,25 @@ const Comment = (props: Props) => {
           <div>Dislike</div>
           <div
             onClick={() => {
+              props.edit(props.treeId, props.id);
+            }}
+          >
+            Edit
+          </div>
+          <div
+            onClick={() => {
               props.addReply(props.treeId);
             }}
           >
             Reply
           </div>
-          <div>Share</div>
+          <div
+            onClick={() => {
+              props.deleteComment(props.treeId, props.id);
+            }}
+          >
+            Delete
+          </div>
         </div>
       </div>
     </div>
