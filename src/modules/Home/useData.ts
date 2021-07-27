@@ -35,7 +35,7 @@ export const useData = (data: CommentInterface[]) => {
           name,
           time: new Date(),
         });
-        // node.replyInput = null;
+        node.replyInput = null;
         setCommentTree(localTree);
       });
     });

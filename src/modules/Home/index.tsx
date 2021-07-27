@@ -22,7 +22,7 @@ export const Home = () => {
     addComment,
     saveReply,
     deleteComment,
-    edit
+    edit,
   } = useData(getCachedData());
   return (
     <div className="container">

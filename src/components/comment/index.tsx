@@ -21,17 +21,19 @@ const Comment = (props: Props) => {
         <img src={props.imgSrc} alt="" className="comment-height" />
       </div>
       <div className="flex-column margin-left-10">
-        <div className="flex">
-          <div className="user-name">{props.name}</div>
-          <div className="flex-column margin-left-20 time">
-            {moment(props.time).fromNow()}
+        <div className="comment-background">
+          <div className="flex">
+            <div className="user-name">{props.name}</div>
+            <div className="flex-column margin-left-20 time">
+              {moment(props.time).fromNow()}
+            </div>
+          </div>
+          <div className="flex comment">
+            <div className="text-left ">{props.comment}</div>
           </div>
         </div>
-        <div className="flex comment">
-          <div className="text-left ">{props.comment}</div>
-        </div>
         <div className="flex" id="comment-actions">
-          {props.likes > 0 && <div>{props.likes}</div>}
+          {/* {props.likes > 0 && <div>{props.likes}</div>}
           <div>Like</div>
           <div>|</div>
           {props.dislikes > 0 && <div>{props.dislikes}</div>}
@@ -42,7 +44,7 @@ const Comment = (props: Props) => {
             }}
           >
             Edit
-          </div>
+          </div> */}
           <div
             onClick={() => {
               props.addReply(props.treeId);

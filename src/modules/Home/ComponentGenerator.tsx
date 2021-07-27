@@ -1,7 +1,6 @@
 import Comment from 'src/components/comment';
-import CommentInput from 'src/components/CommentInput';
-import { CommentInterface, ReplyInputInterface } from 'src/modules/Home/types';
 import ReplyInput from 'src/components/ReplyInput';
+import { CommentInterface } from 'src/modules/Home/types';
 
 const ComponentGenerator = (props: {
   data: Array<CommentInterface>;
