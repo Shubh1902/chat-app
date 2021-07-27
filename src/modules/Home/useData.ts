@@ -5,17 +5,27 @@ import { CommentInterface } from 'src/modules/Home/types';
 import {
   generateRandomImage,
   generateRandomName,
+  getCachedData,
 } from 'src/modules/Home/utility';
 import { v4 as uuidv4 } from 'uuid';
 
 export const useData = (data: CommentInterface[]) => {
   const [commentTree, setCommentTree] = useState(data);
-
+  useEffect(() => {
+    window.addEventListener('storage', updateFromLocalStorage);
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('storage', updateFromLocalStorage);
+      }
+    };
+  }, []);
   useEffect(() => {
     const commentTreeString = JSON.stringify(commentTree);
     localStorage.setItem('commentTree', commentTreeString);
   }, [commentTree]);
-
+  const updateFromLocalStorage = () => {
+    setCommentTree(getCachedData());
+  };
   const saveReply = (treeId: string, comment: string, id: string) => {
     let localTree = _.cloneDeep(data);
     const path = treeId.split('/');
